@@ -1,0 +1,10 @@
+{
+    "name": "bornemix/wordpress-widget-base-class",
+    "description": "",
+    "authors": [
+        {
+            "name": "Bjorn Ali Goransson",
+            "email": "bornemix@gmail.com"
+        }
+    ]
+}
