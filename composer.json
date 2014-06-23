@@ -1,6 +1,6 @@
 {
     "name": "bornemix/wordpress-widget-base-class",
-    "description": "",
+    "description": "Wordpress widget base class",
     "authors": [
         {
             "name": "Bjorn Ali Goransson",
