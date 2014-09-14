@@ -90,8 +90,16 @@ abstract class HH_Widget extends WP_Widget {
 			$this->defaults
 		);
 		
-		foreach($this->fields as $field){
+		foreach($this->fields as $key => $field){
 			$field = (object) $field;
+
+      if(empty($field->name)){
+        $field->name = $key;
+      }
+
+      if(empty($field->label)){
+        $field->label = ucfirst(str_replace("_", " ", $field->name));
+      }
 			
 			$method_name = "render_{$field->type}_field";
 			
