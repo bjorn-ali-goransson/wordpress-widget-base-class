@@ -29,6 +29,22 @@ abstract class HH_Widget extends WP_Widget {
 		if($this->has_title){
 			$this->register_title();
 		}
+    
+    foreach($this->fields as $key => &$field){
+      $field = (object) $field;
+
+      if(empty($field->name)){
+        $field->name = $key;
+      }
+      
+      if(empty($field->label)){
+        $field->label = ucfirst(str_replace("_", " ", $field->name));
+      }
+      
+      if(empty($field->type)){
+        $field->type = 'text';
+      }
+    }
 		
 		$this->init();
 	}
@@ -46,22 +62,6 @@ abstract class HH_Widget extends WP_Widget {
 		array_unshift($this->fields, $field);
 		
 		$this->has_title = true;
-	}
-	
-	function register_field($name, $type, $label, $required = false){
-		$field = new stdClass();
-		
-		$field->name = $name;
-		if($type == "checkbox"){
-			$field->type = "text";
-		} else{
-			$field->type = $type;
-		}
-    
-    $field->label = $label;
-		$field->required = $required;
-		
-		$this->fields[] = $field;
 	}
 	
 	function update( $new_instance, $old_instance ) {
@@ -92,18 +92,6 @@ abstract class HH_Widget extends WP_Widget {
 		
 		foreach($this->fields as $key => $field){
 			$field = (object) $field;
-
-      if(empty($field->name)){
-        $field->name = $key;
-      }
-
-      if(empty($field->label)){
-        $field->label = ucfirst(str_replace("_", " ", $field->name));
-      }
-
-      if(empty($field->type)){
-        $field->type = 'text';
-      }
 			
 			$method_name = "render_{$field->type}_field";
 			
