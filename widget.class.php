@@ -100,6 +100,10 @@ abstract class HH_Widget extends WP_Widget {
       if(empty($field->label)){
         $field->label = ucfirst(str_replace("_", " ", $field->name));
       }
+
+      if(empty($field->type)){
+        $field->type = 'text';
+      }
 			
 			$method_name = "render_{$field->type}_field";
 			
